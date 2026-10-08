@@ -1,19 +1,11 @@
 'use client'
 import Image from "next/image";
-import { useEffect, useState } from "react";
+
+import DateDisplay from "./DateDisplay";
 
 
 const HeaderPage = () => {
- const [date, setDate] = useState<string>("");
-
-  useEffect(() => {
-    // শুধুমাত্র ক্লায়েন্ট সাইডে রান হবে
-    setDate(
-      new Date().toLocaleDateString("bn-BD", {
-        dateStyle: "full",
-      })
-    );
-  }, []);
+ 
   return (
    <header className="w-full">
      <div className="flex  justify-between container mx-auto mt-3 ">
@@ -30,7 +22,7 @@ const HeaderPage = () => {
         </div>
         <div>
           <h1 className="font-extrabold text-2xl">বাজার দর</h1>
-          <h2>{date}</h2>
+          <DateDisplay/>
         </div>
       </div>
       <div className="flex gap-4 ">

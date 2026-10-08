@@ -7,6 +7,7 @@ import Marquee from "@/components/Marquee";
 import { Suspense } from "react";
 
 
+
 const hindSiliguri = Hind_Siliguri({
   subsets: ["latin","bengali"],
   weight: ["300", "400", "500", "600", "700"],
@@ -38,7 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         
         <HeaderPage/>
        <Suspense fallback={<h1>Loading....</h1>}> <NavLinks/></Suspense>
-        <Marquee/>
+       <Suspense fallback={ <h1> Loading..</h1> }>  <Marquee/></Suspense>
        <main>
          {children}
        </main>
