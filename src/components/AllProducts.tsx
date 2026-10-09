@@ -3,7 +3,7 @@ import ProductsCard from "./ProductsCard";
 import IProductsCard from "@/type/type";
 
 const AllProducts = async () => {
-  const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
+  const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
   const data: IProductsCard[] = await res.json();
   // console.log(data, "from products card");
   return (

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 interface ICategories{
 id: string,
@@ -6,7 +7,7 @@ id: string,
     icon: string
 }
 const NavLinks = async() => {
-    const res =await fetch('https://api.abcz.workers.dev/api/bazardor/categories');
+    const res =await fetch('https://api.api-store.workers.dev/api/bazardor/categories');
     const data:ICategories[] = await res.json();
 // console.log(data, "from navlinks");
   
@@ -16,11 +17,11 @@ const NavLinks = async() => {
            data.map((product:ICategories)=>
            ( 
            
-          <div className='flex' key={product.id}>
+          <Link className='flex' key={product.id} href={`/category/${product.slug}`} >
              <h2>{product.icon}</h2> 
              <h2>{product.nameBn}</h2>
                    
-          </div>
+          </Link>
 
 
 

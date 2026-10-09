@@ -39,7 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         
         <HeaderPage/>
        <Suspense fallback={<h1>Loading....</h1>}> <NavLinks/></Suspense>
-       <Suspense fallback={ <h1> Loading..</h1> }>  <Marquee/></Suspense>
+       {/* <Suspense fallback={ <h1> Loading..</h1> }>  <Marquee /></Suspense> */}
        <main>
          {children}
        </main>

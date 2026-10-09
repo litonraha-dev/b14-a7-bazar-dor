@@ -4,7 +4,7 @@ import ProductsCard from './ProductsCard';
 import { FaCaretUp } from 'react-icons/fa';
 
 const PriceRise = async() => {
- const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
+ const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
   const data: IProductsCard[] = await res.json();
 const upProducts = data.filter((product)=>product.change.dir === "up").sort((a,b)=> b.change.pct-a.change.pct);
 
@@ -20,7 +20,7 @@ const upProducts = data.filter((product)=>product.change.dir === "up").sort((a,b
         </div>
         <div className="grid grid-cols-3 ">
         
-      {upProducts.slice(1,7).map((product: IProductsCard) => (
+      {upProducts.slice(0,6).map((product: IProductsCard) => (
         <ProductsCard key={product.id} product={product}/>
       ))}
     </div>
