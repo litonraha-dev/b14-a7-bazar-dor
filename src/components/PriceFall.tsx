@@ -4,7 +4,7 @@ import ProductsCard from "./ProductsCard";
 import { FaCaretDown } from "react-icons/fa";
 
 const PriceFall = async () => {
-  const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
+  const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
   const data: IProductsCard[] = await res.json();
   const fallProducts = data
     .filter((product) => product.change.dir === "down")

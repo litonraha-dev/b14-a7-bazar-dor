@@ -10,7 +10,7 @@ import ProductsCard from "@/components/ProductsCard";
 const CategoryPage = async ({ params }) => {
   const { id } = await params;
   const res = await fetch(
-    `https://api.api-store.workers.dev/api/bazardor/products?category=${id}`,
+    `https://openapi.programming-hero.com/api/bazardor/products?category=${id}`,
   );
   const CategoryProduct = await res.json();
 const categoryName = CategoryProduct[0]?.categoryNameBn;

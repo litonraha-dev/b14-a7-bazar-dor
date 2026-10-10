@@ -4,7 +4,7 @@ import ProductsCard from './ProductsCard';
 import { FaCaretUp } from 'react-icons/fa';
 
 const PriceRise = async() => {
- const res = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
+ const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
   const data: IProductsCard[] = await res.json();
 const upProducts = data.filter((product)=>product.change.dir === "up").sort((a,b)=> b.change.pct-a.change.pct);
 
