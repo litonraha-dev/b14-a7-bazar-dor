@@ -1,37 +1,33 @@
-'use client'
-import Image from "next/image";
+import Link from 'next/link';
+import React from 'react';
 
-import DateDisplay from "./DateDisplay";
-
-
-const HeaderPage = () => {
- 
-  return (
-   <header className="w-full">
-     <div className="flex  justify-between container mx-auto mt-3 ">
-    
-      <div className="flex gap-3 items-center   ">
+const Header = () => {
+    return (
         <div>
-          <Image
-            src={"/logo.png"}
-            height={50}
-            width={50}
-            alt="logo image"
-            className=""
-          ></Image>
+              <div className='flex justify-between m-4'>
+      <Link href="/" className="flex items-center gap-2">
+          <span className="text-2xl">🛒</span>
+          <div>
+            <h1 className="text-xl font-bold text-green-700 leading-tight">
+              বাজার দর
+            </h1>
+        
+          </div>
+        </Link>
+
+        <div className='flex gap-3 '>
+      <Link href='/signin' className='btn btn-accent'>
+       সাইন ইন
+
+      </Link>
+
+      <Link href='/signup' className='btn btn-active'>
+      সাইন আপ
+      </Link>
         </div>
-        <div>
-          <h1 className="font-extrabold text-2xl">বাজার দর</h1>
-          <DateDisplay/>
+   </div>
         </div>
-      </div>
-      <div className="flex gap-4 ">
-        <button className="btn btn-primary">Sign In</button>
-        <button className="btn btn-accent">Sign Out</button>
-      </div>
-    </div>
-   </header>
-  );
+    );
 };
 
-export default HeaderPage;
+export default Header;

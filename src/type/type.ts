@@ -8,3 +8,7 @@ export default interface IProductsCard {
     pct: number;
   };
 }
+
+// export default interface Category{
+
+// }

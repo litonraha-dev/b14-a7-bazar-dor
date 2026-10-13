@@ -1,13 +1,16 @@
 import IProductsCard from "@/type/type";
+import Link from "next/link";
 
 interface ProductsCardProps{
     product:IProductsCard
 }
 const CategoryProductsCard =  ({product}:ProductsCardProps) => {
-    console.log(product, "allProduct page");
+    
   
   return (
-    <div  className="bg-white m-4 p-3 border-none rounded-2xl">
+    <Link href={`product/${product.id}`}>
+    
+  <div  className="bg-white m-4 p-3 border-none rounded-2xl">
           <div className="flex gap-2 items-center">
             <h1 className="text-3xl bg-gray-300 p-2 border-none rounded-2xl">
               {product.categoryIcon}
@@ -36,6 +39,7 @@ const CategoryProductsCard =  ({product}:ProductsCardProps) => {
             </div>
           </div>
         </div>
+  </Link>
   );
 };
 

@@ -1,4 +1,6 @@
 import IProductsCard from "@/type/type";
+import Link from "next/link";
+import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 
 interface ProductsCardProps{
     product:IProductsCard
@@ -7,6 +9,7 @@ const ProductsCard =  ({product}:ProductsCardProps) => {
     console.log(product, "allProduct page");
   
   return (
+   <Link href={`product/${product.id}`}>
     <div  className="bg-white m-4 p-3 border-none rounded-2xl">
           <div className="flex gap-2 items-center">
             <h1 className="text-3xl bg-gray-300 p-2 border-none rounded-2xl">
@@ -27,15 +30,16 @@ const ProductsCard =  ({product}:ProductsCardProps) => {
             </div>
             <div className="font-bold ">
               {product.change.dir === "up" ? (
-                <h2 className="text-red-500 bg-red-100 px-2 border-none rounded-2xl">{product.change.pct}%</h2>
+                <h2 className="text-red-500 bg-gray-100 px-2 border-none rounded-2xl flex items-center gap-1"> <FaCaretUp  className=""/>{product.change.pct}%</h2>
               ) : (
-                <h2 className="text-green-500 bg-green-100 px-2 border-none rounded-2xl">
-                  {Math.abs(product.change.pct)}%
+                <h2 className="text-green-500 bg-gray-100 px-2 border-none rounded-2xl flex items-center gap-1">
+                 <FaCaretDown /> {Math.abs(product.change.pct)}%
                 </h2>
               )}
             </div>
           </div>
         </div>
+   </Link> 
   );
 };
 
