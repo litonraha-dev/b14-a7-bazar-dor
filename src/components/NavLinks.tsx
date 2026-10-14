@@ -1,5 +1,5 @@
 "use client";
-import { useSession } from "@/app/lib/auth-client";
+import { authClient, useSession } from "@/app/lib/auth-client";
 import { Button, ButtonRoot } from "@heroui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,6 +16,13 @@ const NavLinks = () => {
       .catch((err) => console.error("Error fetching categories:", err));
   }, []);
   // console.log(categories, "from navlinks");
+  console.log(session?.user.name, "from navlinks");
+  const handleSignOut=async()=>{
+    const{data,error} = await authClient.signOut();
+if(data){
+  redirect:('/signin')
+}
+  }
 
   return (
     <header className=" container mx-auto m-2 ">
@@ -29,16 +36,26 @@ const NavLinks = () => {
               </h1>
             </div>
           </Link>
+         <div >
+           {session?.user ? (
+            <>
+              <h1>{session.user.name}</h1>
+              <Button onClick={handleSignOut}>সাইন আউট</Button>
+            </>
+          ) : (
+            <>
+            <div className=" ">
+                <Link href="/signin" className="btn btn-accent">
+                  <Button> সাইন ইন</Button>
+                </Link>
 
-          <div className="flex gap-3 ">
-            <Link href="/signin" className="btn btn-accent">
-              <Button> সাইন ইন</Button>
-            </Link>
-
-            <Link href="/signup">
-              <Button>সাইন আপ</Button>
-            </Link>
-          </div>
+                <Link href="/signup">
+                  <Button>সাইন আপ</Button>
+                </Link>
+              </div>
+            </>
+          )}
+         </div>
         </div>
       </div>
       <div className="flex gap-4">
