@@ -1,18 +1,26 @@
-import ProductCards from "@/components/ProductCards";
+
+import { IMarket } from "@/type/type";
 import React from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+interface ProductPageProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
 
-const ProductPage = async ({ params }) => {
-  const { productId } = await params;
+
+
+const ProductPage = async ({ params }:ProductPageProps) => {
+  const { slug } = await params;
   const res = await fetch(
-    `https://openapi.programming-hero.com/api/bazardor/products/${productId}`,
+    `https://openapi.programming-hero.com/api/bazardor/products/${slug}`,
   );
   const product = await res.json();
   console.log(product, "from productpage");
-  const lowestMarket = product.markets.reduce((lowest, current) =>
+  const lowestMarket = product.markets.reduce((lowest:IMarket, current:IMarket) =>
     current.min < lowest.min ? current : lowest,
   );
-  const highetsMarket = product.markets.reduce((highest, current) =>
+  const highetsMarket = product.markets.reduce((highest:IMarket, current:IMarket) =>
     current.max > highest.max ? current : highest,
   );
   const avgRate = (highetsMarket.max + lowestMarket.min) / 2;
@@ -114,7 +122,7 @@ const ProductPage = async ({ params }) => {
       </thead>
 
       <tbody>
-        {product.markets.map((m,index) => (
+        {product.markets.map((m:IMarket,index:number) => (
           <tr
             key={index}
             className="border-t border-gray-200 hover:bg-gray-50"

@@ -3,18 +3,31 @@
 import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import { authClient } from "../lib/auth-client";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 
 const SignInPage = () => {
- const onSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+
+// ১. onSubmit ফাংশনটিকে সিঙ্ক্রোনাস রাখা হয়েছে (যা Form কম্পোনেন্টের টাইপের সাথে মিলে যায়)
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // ২. এসিনক্রোনাস লজিক রান করার জন্য আলাদা ফাংশন কল করা হচ্ছে
+    handleSignIn(e);
+  };
+
+ const handleSignIn = async(e: React.FormEvent<HTMLFormElement>) => {
    e.preventDefault();
+ 
    const formData = new FormData(e.currentTarget);
-   const user = Object.fromEntries(formData.entries())
+   const user = Object.fromEntries(formData.entries()) as {
+      email: string;
+      password: string;
+    };
  
    const{ data, error} = await authClient.signIn.email({
      ...user,
      callbackURL:'/'
- 
  
    });
  
@@ -94,6 +107,8 @@ const SignInPage = () => {
     </Button>
   </Form>
  </div>
+ <h1>অ্যাকাউন্ট নেই? <Link href={'/signup'} className="text-blue-400 mb-3">সাইন আপ করুন</Link></h1>
+
 </div>
   );
 };

@@ -2,13 +2,18 @@
 import { authClient, useSession } from "@/app/lib/auth-client";
 import { Button, ButtonRoot } from "@heroui/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
+interface ICategory {
+  id: string;
+  slug: string;
+  nameBn: string;
+  icon: string;
+}
 const NavLinks = () => {
   const { data: session, isPending } = useSession();
   const pathname = usePathname();
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
   useEffect(() => {
     fetch("https://openapi.programming-hero.com/api/bazardor/categories")
       .then((res) => res.json())
@@ -18,11 +23,17 @@ const NavLinks = () => {
   // console.log(categories, "from navlinks");
   console.log(session?.user.name, "from navlinks");
   const handleSignOut=async()=>{
-    const{data,error} = await authClient.signOut();
-if(data){
-  redirect:('/signin')
-}
+    const{error} = await authClient.signOut();
+     if (error) {
+    console.log(error.message);
+    return;
   }
+else{
+  redirect('/signin')
+}
+
+   
+}
 
   return (
     <header className=" container mx-auto m-2 ">

@@ -13,15 +13,28 @@ import { authClient } from "../lib/auth-client";
 import { redirect } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import Link from "next/link";
 
 
 
 
 const SignUpPage = () => {
-  const onSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+
+   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // ২. এসিনক্রোনাস লজিক রান করার জন্য আলাদা ফাংশন কল করা হচ্ছে
+    handleSignUp(e);
+  };
+
+  const handleSignUp = async(e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
-  const formData = new FormData(e.target);
-  const user = Object.fromEntries(formData.entries())
+  const formData = new FormData(e.currentTarget);
+  const user = Object.fromEntries(formData.entries())as {
+      email: string;
+      password: string;
+      name:string,
+    };
 
   const{ data, error} = await authClient.signUp.email({
     ...user,
@@ -145,6 +158,7 @@ Google দিয়ে চালিয়ে যান
     </Button></div>
   </Form>
  </div>
+  <h1>অ্যাকাউন্ট আছে?  <Link href={'/signin'} className="text-blue-400 mb-3">সাইন ইন করুন</Link></h1>
 </div>
 
   );
